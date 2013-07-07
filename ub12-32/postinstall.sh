@@ -29,9 +29,6 @@ usermod -a -G sudo vagrant
 cp /etc/sudoers /etc/sudoers.orig
 sed -i -e 's/%sudo\tALL=(ALL:ALL) ALL/%sudo\tALL=(ALL:ALL) NOPASSWD:ALL/' /etc/sudoers
 
-# Add puppet user and group
-adduser --system --group --home /var/lib/puppet puppet
-
 # Install NFS client
 apt-get -y install nfs-common
 
@@ -55,10 +52,6 @@ cd rubygems-$RUBYGEMS_VERSION
 /opt/ruby/bin/ruby setup.rb
 cd ..
 rm -rf rubygems-$RUBYGEMS_VERSION
-
-# Installing chef & Puppet
-/opt/ruby/bin/gem install chef --no-ri --no-rdoc
-/opt/ruby/bin/gem install puppet --no-ri --no-rdoc
 
 # Add /opt/ruby/bin to the global path as the last resort so
 # Ruby, RubyGems, and Chef/Puppet are visible
